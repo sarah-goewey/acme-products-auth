@@ -17,6 +17,7 @@ const App = ()=> {
       <Link to='/products'>Products ({ products.length })</Link>
       <Routes>
         <Route path='/products' element={ <Products /> } />
+        <Route path='/products/:filterString' element={ <Products /> } />
       </Routes>
     </div>
   );
