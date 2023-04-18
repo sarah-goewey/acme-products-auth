@@ -44,6 +44,16 @@ app.post('/api/auth', async(req, res, next)=> {
   }
 });
 
+app.post('/api/users', async(req, res, next) => {
+  try {
+    const user = await User.create(req.body)
+    res.status(201).send(user)
+  }
+  catch(ex) {
+    next(ex)
+  }
+})
+
 app.get('/api/auth/:token', async(req, res, next)=> {
   try{
     const token = jwt.verify(req.params.token, process.env.JWT);

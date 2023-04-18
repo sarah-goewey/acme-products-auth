@@ -10,9 +10,19 @@ const products = (state = [], action)=> {
   return state;
 };
 
+const users = (state = [], action) => {
+  if (action.type === 'ADD_USER') {
+    return [...state, action.user]
+  }
+  return state
+}
+
 const auth = (state = {}, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
+  }
+  if(action.type === 'ADD_AUTH') {
+    return [...state, action.auth]
   }
   return state;
 };
@@ -33,6 +43,13 @@ export const loginWithToken = ()=> {
   };
 };
 
+export const createUser = (user) => {
+  return async(dispatch) => {
+    const response = await axios.post('/api/users', user)
+    dispatch({type: 'ADD_USER', user: response.data})
+  }
+}
+
 export const logout = ()=> {
   return (dispatch)=> {
     window.localStorage.removeItem('token');
@@ -52,7 +69,8 @@ export const login = (credentials)=> {
 
 const reducer = combineReducers({
   products,
-  auth
+  auth,
+  users
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
