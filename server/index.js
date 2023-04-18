@@ -1,6 +1,6 @@
 const port = process.env.PORT || 3000;
 const app = require('./app');
-const { conn, Product } = require('./db');
+const { conn, Product, User } = require('./db');
 
 app.listen(port, async()=> {
   try {
@@ -14,8 +14,8 @@ app.listen(port, async()=> {
       Product.create({ name: 'bazz'}),
       Product.create({ name: 'quq'}),
       Product.create({ name: 'quq!!', inStock: false}),
-
-
+      User.create({ username: 'moe', password: 'm' }), 
+      User.create({ username: 'lucy', password: 'l' }), 
     ]);
     console.log('seeded');
   }

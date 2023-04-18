@@ -13,7 +13,18 @@ const Product = conn.define('product', {
   }
 });
 
+const User = conn.define('user', {
+  username: {
+    type: STRING,
+    unique: true
+  },
+  password: {
+    type: STRING
+  },
+});
+
 module.exports = {
   Product,
+  User,
   conn
 };
